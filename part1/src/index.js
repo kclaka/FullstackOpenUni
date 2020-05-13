@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import ReactDOM from 'react-dom'
 
 const Header = (props) => {
@@ -71,4 +71,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root')) */
