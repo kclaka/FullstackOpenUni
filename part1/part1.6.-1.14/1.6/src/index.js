@@ -16,14 +16,25 @@ const Display = ({heading}) =>{
 }
 
 const Statistics = (props) =>{
+  
+  if (props.all === 0){
+    return(
+      <div>
+      <h1>{props.title}</h1>
+      <p>No feedback given</p>
+      </div>
+      
+    )
+  }
   return(
     <div>
-      <h1>{props.title}</h1>
+    <h1>{props.title}</h1>
       <p>
       good {props.good} <br></br>
       neutral {props.neutral} <br></br>
       bad {props.bad} <br></br>
       all {props.all} <br></br>
+      average {props.avergae} <br></br>
       positive {props.positive} % 
       </p>
       
@@ -42,6 +53,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
   
   let all = good + neutral + bad
+  let avgerage = all/3
   let positive = (good/all) * 100
 
   return (
@@ -54,7 +66,7 @@ const App = () => {
       <Button click={()=>setBad(bad + 1)} text={"bad"}/>
 
       <Statistics title={"Statisitcs"} good={good} neutral={neutral} 
-                        bad={bad} all={all} positive={positive}/> 
+                        bad={bad} all={all} avergae={avgerage} positive={positive}/> 
     </div>
   )
 }
