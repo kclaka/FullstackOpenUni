@@ -1,11 +1,37 @@
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Display = ({heading, anecdotes}) =>{
+  return(
+    <div> 
+      <h1>{heading}</h1>
+      {anecdotes}
+    </div>
+  )
+}
+
+const DisplayVotes = ({votes}) =>{
+  return(
+    `has ${votes} votes`
+  )
+}
+
+
 const App = (props) => {
+  
   const [selected, setSelected] = useState(0)
+  // eslint-disable-next-line
+  const [vote, setVote] = useState(0)
+
+  
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      
+      <Display heading={"Anecdotes of the Day"}/>
+      {props.anecdotes[selected]}<br></br>
+      <DisplayVotes votes={4}/><br></br>
+      <button>vote</button><button onClick= { () => setSelected(Math.floor(Math.random()*anecdotes.length)) } > next anecdotes</button>
     </div>
   )
 }
