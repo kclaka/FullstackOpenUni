@@ -16,33 +16,18 @@ const Display = ({heading}) =>{
 }
 
 const Statistics = (props) =>{
-  
-  if (props.all === 0){
-    return(
-      <div>
-      <h1>{props.title}</h1>
-      <p>No feedback given</p>
-      </div>
-      
-    )
-  }
   return(
-    <div>
-    <h1>{props.title}</h1>
-      <p>
-      good {props.good} <br></br>
-      neutral {props.neutral} <br></br>
-      bad {props.bad} <br></br>
-      all {props.all} <br></br>
-      average {props.avergae} <br></br>
-      positive {props.positive} % 
-      </p>
+          <tr>
+            <td>{props.text}</td><td>{props.value}</td>
+          </tr> 
       
       
-      
-        
-     
-    </div>
+  )
+}
+
+const NoFeedBack = () => {
+  return(
+    <p>No Feedback given</p>
   )
 }
 
@@ -54,21 +39,45 @@ const App = () => {
   
   let all = good + neutral + bad
   let avgerage = all/3
-  let positive = (good/all) * 100
+  let positive = ((good/all) * 100).toString() + "%"
 
-  return (
-    <div>
+  if (all === 0){
+    return(
+      <div>
+        <Display heading={"Give Feedback"}/>
+        <Button click={()=>setGood(good + 1)} text={"good"}/>
+        <Button click={()=>setNeutral(neutral + 1)} text={"neutral"}/>
+        <Button click={()=>setBad(bad + 1)} text={"bad"}/>
+        <NoFeedBack/>
+        </div>
       
+    )
+  }else{
+    return (
+      <div>
       <Display heading={"Give Feedback"}/>
-      
       <Button click={()=>setGood(good + 1)} text={"good"}/>
       <Button click={()=>setNeutral(neutral + 1)} text={"neutral"}/>
       <Button click={()=>setBad(bad + 1)} text={"bad"}/>
+  
+        <Display heading={"Statistics"}/>
+        <table>
+          <tbody>
+            <Statistics text={"good"} value={good} /> 
+            <Statistics text={"neutral"} value={neutral} /> 
+            <Statistics text={"bad"} value={bad} /> 
+            <Statistics text={"all" } value={all} /> 
+            <Statistics text={"avgerage" } value={avgerage} /> 
+            <Statistics text={"positive"} value={positive}/>
+          </tbody>
+        </table>
+        
+      </div>
+    )
+  }
 
-      <Statistics title={"Statisitcs"} good={good} neutral={neutral} 
-                        bad={bad} all={all} avergae={avgerage} positive={positive}/> 
-    </div>
-  )
+  
+  
 }
 
 ReactDOM.render(<App />, 
