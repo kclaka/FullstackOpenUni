@@ -23,15 +23,30 @@ const App = (props) => {
   // eslint-disable-next-line
   const [vote, setVote] = useState(0)
 
+  const points = { 0: 1, 1: 3, 2: 4, 3: 2, 4:5, 5:6, }
+  const score = { ...points }
+  console.log(score[selected])
+
+  const HandleVotes = () =>{
+    const voteIncrease = () =>{
+      setVote(score[selected] += 1)
+    }
+
+    return voteIncrease
+  }
   
+ 
 
   return (
     <div>
-      
       <Display heading={"Anecdotes of the Day"}/>
       {props.anecdotes[selected]}<br></br>
-      <DisplayVotes votes={4}/><br></br>
-      <button>vote</button><button onClick= { () => setSelected(Math.floor(Math.random()*anecdotes.length)) } > next anecdotes</button>
+      <DisplayVotes votes={vote}/><br></br>
+      <button onClick={ HandleVotes()}>vote</button><button onClick= { () => setSelected(Math.floor(Math.random()*anecdotes.length)) } > next anecdotes</button>
+
+      <Display heading={"Anecdotes with most votes"}/>
+      {props.anecdotes[selected]}<br></br>
+      <DisplayVotes votes={vote}/><br></br>
     </div>
   )
 }
