@@ -9,44 +9,57 @@ const Display = ({heading, anecdotes}) =>{
     </div>
   )
 }
-
-const DisplayVotes = ({votes}) =>{
+// eslint-disable-next-line
+const TopVotes = ({votes, annec}) =>{
+  let i = votes.indexOf(Math.max(...votes))
   return(
-    `has ${votes} votes`
+    <div>
+      <div>{annec[i]}</div>
+      <div>has {votes[i]} votes</div>
+    </div>
+
+    
+  )
+}
+
+// eslint-disable-next-line
+const DisplayVotes = (props) =>{
+  return(
+    `has ${props.votes} votes`
   )
 }
 
 
+
+
 const App = (props) => {
-  
+  let len = props.anecdotes.length
+  // eslint-disable-next-line
   const [selected, setSelected] = useState(0)
   // eslint-disable-next-line
-  const [vote, setVote] = useState(0)
+  const [votes, setVote] = useState(Array(len).fill(0))
 
-  const points = { 0: 1, 1: 3, 2: 4, 3: 2, 4:5, 5:6, }
-  const score = { ...points }
-  console.log(score[selected])
-
-  const HandleVotes = () =>{
-    const voteIncrease = () =>{
-      setVote(score[selected] += 1)
-    }
-
-    return voteIncrease
+  // eslint-disable-next-line
+  const handleVotes = () => {
+    const copy = [...votes]
+    console.log(copy)
+    copy[selected] += 1
+    setVote(copy)
   }
+
   
- 
 
   return (
     <div>
       <Display heading={"Anecdotes of the Day"}/>
       {props.anecdotes[selected]}<br></br>
-      <DisplayVotes votes={vote}/><br></br>
-      <button onClick={ HandleVotes()}>vote</button><button onClick= { () => setSelected(Math.floor(Math.random()*anecdotes.length)) } > next anecdotes</button>
+      <DisplayVotes votes={votes[selected]}/><br></br>
+      <button onClick={handleVotes}>vote</button>
+      
+      <button onClick= { () => setSelected(Math.floor(Math.random()*len)) }> next anecdotes</button>
 
       <Display heading={"Anecdotes with most votes"}/>
-      {props.anecdotes[selected]}<br></br>
-      <DisplayVotes votes={vote}/><br></br>
+      <TopVotes votes={votes} annec={props.anecdotes}/><br></br>
     </div>
   )
 }
