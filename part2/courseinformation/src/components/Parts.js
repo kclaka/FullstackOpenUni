@@ -3,9 +3,11 @@ import React from 'react'
 
 const Parts = ({part, excercise}) =>{
     return(
-        <p>
-            {part} {excercise}
-        </p>
+        
+            
+        <div>
+            <p>{part} {excercise}</p>
+        </div>
     ) 
 
 }

@@ -27,6 +27,13 @@ const App = () => {
     ]
   }
 
+  let total = 0
+  course.parts.forEach(
+    part => total += part.exercises
+  )
+
+  
+
   return (
     <div>
       <Course name={course.name} />
@@ -35,6 +42,8 @@ const App = () => {
           part =><Parts key={part.id} part={part.name} excercise={part.exercises}/>
         )}
       </div>
+
+      <p><b>total of {total} exercises</b></p>
       
     </div>
   )
