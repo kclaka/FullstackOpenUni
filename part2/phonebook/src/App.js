@@ -9,36 +9,41 @@ const App = () => {
 
   const addNote = (event) =>{
     event.preventDefault()
+    
+    const personObject = {
+      name: newName,
+    }
+
+    setPersons(persons.concat(personObject))
+    setNewName('')
   }
 
-  const handlenotChange = (event) =>{
-    console.log(event.target.value)
+  const handlenoteChange = (event) =>{
     setNewName(event.target.value)
   }
 
-  const personObject = {
-    name:persons
-  }
-
-  setPersons(persons.concat(personObject))
+  
+  
+  
+  
+  
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addNote} onChange={handlenotChange} >
+      <form onSubmit={addNote}  >
         <div>
-          name: <input value={newName} onChange={handlenotChange}/>
+          name: <input value={newName} onChange={handlenoteChange}/>
         </div>
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-        <div>
+      
           {persons.map((person, i) => 
             <Person key={i} name={person.name}/>
           )}
-        </div>
     </div>
   )
 }
