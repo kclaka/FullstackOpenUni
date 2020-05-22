@@ -26,16 +26,14 @@ const App = () => {
   const handlenoteChange = (event) =>{
 
     persons.forEach(person => {
-      if(person.name === event.target.value){
+      if(person.name.toLowerCase() === event.target.value.toLowerCase()){
         alert(`${event.target.value} is already in the phonebook`)
         setNewName('')
       }else{
         setNewName(event.target.value)
       }
-    })
-   
-    
-    
+    }) 
+
   }
 
   
