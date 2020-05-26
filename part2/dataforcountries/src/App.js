@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Search from './components/Search';
+import axios from 'axios'
+import Display from './components/Display';
+
 
 function App() {
+
+  const[searchTerm, setSearch] = useState([])
+  const[filterTerm, setFilterTerm] = useState('')
+
+  useEffect(() => {
+    axios
+    .get("https://restcountries.eu/rest/v2/all")
+    .then(response => {
+      const countriesApi = response.data
+      setSearch(countriesApi)
+    })
+
+  })
+
+  const handleFilter = (event)=>{
+    setFilterTerm(event.target.value)
+
+  }
+
+  
+  const filterApi = searchTerm.filter(country => country.name.toLowerCase().includes(filterTerm))
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search handleFilter = {handleFilter}/>
+
+      {
+        if(filterApi.Length < 2){
+          <Display data={filterApi}/>
+        }
+      
+      }
+      
+        
+      
     </div>
   );
 }
