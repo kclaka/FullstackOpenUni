@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const DisplayLang = (props) => {
+const DisplayLang = (props) => {    
     return(
         <>
             {props.language.map((lang, i) =>(
@@ -13,22 +13,22 @@ const DisplayLang = (props) => {
         ))}
         </>
         
+)}
+   
 
+const Display = (props) => {
 
-    )
-    
-}
-
-    
-    
-        
-        
-    
-
-    
-
-const Display = (props) => 
-    props.data.map((item, i)=> (
+    if(props.data.length > 10){
+        return(<p>Too many Results</p>)
+    }else if (props.data.length <= 5 && props.data.length >= 2){
+        return (props.data.map( (item, i) => (
+            <div key={i}>
+                <>{item.name}<br></br></> 
+            </div>
+            
+        )))
+    }
+    return (props.data.map((item, i)=> (
         <div key={i}>
             <span>
                 <h1>{item.name}</h1>
@@ -44,10 +44,10 @@ const Display = (props) =>
                  
             
         </div>
-    ))
+    )))
 
 
-        
+}       
 
         
 

@@ -25,24 +25,21 @@ function App() {
   }
 
   
-  const filterApi = searchTerm.filter(country => country.name.toLowerCase().includes(filterTerm))
- 
-
-  return (
-    <div className="App">
+  const filterApi = searchTerm.filter(country => country.name.toLowerCase().includes(filterTerm.toLowerCase()))
+  
+  return(
+    <div>
       <Search handleFilter = {handleFilter}/>
+      <Display data={filterApi}/>
+    </div>
+    
+  )
 
-      {
-        if(filterApi.Length < 2){
-          <Display data={filterApi}/>
-        }
-      
-      }
+  
+  
       
         
-      
-    </div>
-  );
+    
 }
 
 export default App;
